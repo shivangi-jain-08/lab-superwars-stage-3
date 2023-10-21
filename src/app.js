@@ -27,6 +27,22 @@ const initPlayers = (players) => {
 
     // Instead of forloop use Map method
     // Code here
+    players.forEach((p, i) => {
+        if(i%2==0){
+            var t = "hero"
+        }else{
+            var t = "villain"
+        }
+        detailedPlayers.push({
+            name: p,
+            strength: 2 + i,
+            image: 'images/super-' + (i + 1) + '.png',
+            type: t,
+            
+            id: i + 1,
+        });
+        console.log("t: ", t);
+    });
 
     return detailedPlayers;
 }
@@ -36,6 +52,22 @@ const getRandomStrength = () => {
     return Math.ceil(Math.random() * 100);
 }
 
+const createPresentation = (playerObj) => {
+    var player = document.createElement('div');
+    player.classList.add('player');
+    var image = document.createElement('img');
+    image.setAttribute('src', playerObj.image);
+    image.setAttribute('alt', '');
+    var name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = playerObj.name;
+    var strength = document.createElement('div');
+    strength.textContent = playerObj.strength;
+    strength.className = 'strength';
+    player.append(image, name, strength);
+    return player;
+    };
+
 // Build player template
 const buildPlayers = (players, type) => {
     let fragment = '';
@@ -43,8 +75,9 @@ const buildPlayers = (players, type) => {
     // Instead of using for loop
     // Use chaining of Array methods - filter, map and join
     // Type your code here
-
-    return fragment;
+    players.filter((player) => player.type == type)
+    players.forEach((player) => fragment.append(createPresentation(player)));
+    return fragment.innerHTML;
 }
 
 // Display players in HTML
