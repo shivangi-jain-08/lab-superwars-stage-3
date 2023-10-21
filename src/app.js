@@ -23,7 +23,7 @@ const PLAYERS = [
 
 // initialize players with image and strength
 const initPlayers = (players) => {
-    let detailedPlayers = '';
+    let detailedPlayers = [];
 
     // Instead of forloop use Map method
     // Code here
@@ -70,7 +70,7 @@ const createPresentation = (playerObj) => {
 
 // Build player template
 const buildPlayers = (players, type) => {
-    let fragment = '';
+    let fragment = document.createElement('div');
 
     // Instead of using for loop
     // Use chaining of Array methods - filter, map and join
